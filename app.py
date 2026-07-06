@@ -1,21 +1,26 @@
 import streamlit as st
 
-st.set_page_config(
-    page_title="Chinese Learning Toolkit",
-    page_icon="📚",
-    layout="wide"
-)
+st.set_page_config(page_title="Chinese Learning Toolkit", page_icon="📚", layout="wide")
 
 st.title("📚 Chinese Learning Toolkit")
 
-st.write("""
-Welcome!
+tool = st.sidebar.selectbox(
+    "Choose tool", ["Home", "Hanzi Practice PDF", "Viterbi Tokenizer"]
+)
 
-Choose a tool from the sidebar.
+if tool == "Home":
+    st.write("""
+    Welcome!
 
-Current tools:
-- ✍️ Hanzi Practice PDF
-- 🛠 Tool B
-- 🛠 Tool C
-- 🛠 Tool D
-""")
+    Choose a tool from the sidebar.
+
+    Current tools:
+    - ✍️ Hanzi Practice PDF
+    - 🧠 Viterbi Tokenizer
+    """)
+
+elif tool == "Viterbi Tokenizer":
+    st.switch_page("pages/02_viterbi_tokenizer.py")
+
+elif tool == "Hanzi Practice PDF":
+    st.switch_page("pages/01_Practice_Sheet.py")
