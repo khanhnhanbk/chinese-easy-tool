@@ -1,5 +1,5 @@
 import math
-from pathlib import Path
+
 import re
 import io
 from reportlab.pdfgen import canvas
@@ -11,10 +11,8 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 
 from datas.usersetting import SeparatorEnum, UserSettings
+from services import BASE_DIR
 from services.normalizer_tool import TextNormalizer
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 FONT_PATH = BASE_DIR / "fonts" / "Kaiti.ttf"
 PINYIN_FONT = BASE_DIR / "fonts" / "SpaceGrotesk.ttf"
@@ -67,9 +65,9 @@ class ChinesePracticeSheetGenerator:
     pdfmetrics.registerFont(TTFont("PinyinFont", PINYIN_FONT))  # type: ignore
     CHAR_FONT = "KaiTi"
     PINYIN_FONT = "PinyinFont"
-    BLACK : tuple[float, float, float] = (0, 0, 0)
-    GRAY : tuple[float, float, float] = (0.6, 0.6, 0.6)
-    RED : tuple[float, float, float] = (0.8, 0.4, 0.4)
+    BLACK: tuple[float, float, float] = (0, 0, 0)
+    GRAY: tuple[float, float, float] = (0.6, 0.6, 0.6)
+    RED: tuple[float, float, float] = (0.8, 0.4, 0.4)
 
     def __init__(
         self, characters: str, user_settings: UserSettings, output: str | None = None
@@ -86,8 +84,7 @@ class ChinesePracticeSheetGenerator:
         else:
             self.buffer = None
             self.filename = build_output_file(
-                user_settings.output_directory,
-                user_settings.output_filename
+                user_settings.output_directory, user_settings.output_filename
             )
             self.output_mode = "file"
 
@@ -102,38 +99,38 @@ class ChinesePracticeSheetGenerator:
         c = self.pdf_canvas
         size = self.settings.grid_size
 
-        c.setStrokeColorRGB(*self.RED) # type: ignore
+        c.setStrokeColorRGB(*self.RED)  # type: ignore
 
-        c.setLineWidth(1.2) # type: ignore
-        c.rect(x, y, size, size, stroke=1, fill=0) # type: ignore
+        c.setLineWidth(1.2)  # type: ignore
+        c.rect(x, y, size, size, stroke=1, fill=0)  # type: ignore
 
-        c.setLineWidth(0.5) # type: ignore
-        c.setDash(2, 2) # type: ignore
- 
-        c.line(x, y + size / 2, x + size, y + size / 2) # type: ignore
-        c.line(x + size / 2, y, x + size / 2, y + size) # type: ignore
-        c.line(x, y, x + size, y + size) # type: ignore
-        c.line(x, y + size, x + size, y) # type: ignore
+        c.setLineWidth(0.5)  # type: ignore
+        c.setDash(2, 2)  # type: ignore
 
-        c.setDash() # type: ignore
+        c.line(x, y + size / 2, x + size, y + size / 2)  # type: ignore
+        c.line(x + size / 2, y, x + size / 2, y + size)  # type: ignore
+        c.line(x, y, x + size, y + size)  # type: ignore
+        c.line(x, y + size, x + size, y)  # type: ignore
+
+        c.setDash()  # type: ignore
 
     def draw_character(self, char: str, x: float, y: float, phrase_index: int):
         c = self.pdf_canvas
         size = self.settings.grid_size
         font_size = size * 0.75
 
-        c.setFont(self.CHAR_FONT, font_size) # type: ignore
+        c.setFont(self.CHAR_FONT, font_size)  # type: ignore
         text_width = pdfmetrics.stringWidth(char, self.CHAR_FONT, font_size)
 
         text_x = x + (size - text_width) / 2
         text_y = y + (size - font_size) / 2 + font_size * 0.2
 
         if phrase_index == 0:
-            c.setFillColorRGB(*self.BLACK) # type: ignore
-            c.drawString(text_x, text_y, char) # type: ignore
+            c.setFillColorRGB(*self.BLACK)  # type: ignore
+            c.drawString(text_x, text_y, char)  # type: ignore
         elif phrase_index < self.settings.trace_columns:
-            c.setFillColorRGB(*self.GRAY) # type: ignore
-            c.drawString(text_x, text_y, char) # type: ignore
+            c.setFillColorRGB(*self.GRAY)  # type: ignore
+            c.drawString(text_x, text_y, char)  # type: ignore
 
     def get_lines(self) -> list[str]:
 
@@ -183,7 +180,7 @@ class ChinesePracticeSheetGenerator:
             (phrase, start_index)
         """
 
-        rows : list[tuple[str, int]] = []
+        rows: list[tuple[str, int]] = []
 
         usable_cells = self.cols_per_page - 1
 
@@ -214,12 +211,12 @@ class ChinesePracticeSheetGenerator:
         char_pinyin = get_pinyin(char)
 
         font_size = max(8, int(self.settings.grid_size / 4))
-        c.setFont(self.PINYIN_FONT, font_size) # type: ignore
-        c.setFillColorRGB(*self.BLACK) # type: ignore
+        c.setFont(self.PINYIN_FONT, font_size)  # type: ignore
+        c.setFillColorRGB(*self.BLACK)  # type: ignore
 
         available_width = self.settings.grid_size - 4
         tokens = char_pinyin.split()
-        lines : list[str] = []
+        lines: list[str] = []
         current = ""
         for tok in tokens:
             test = (current + " " + tok).strip() if current else tok
@@ -242,7 +239,7 @@ class ChinesePracticeSheetGenerator:
         pinyin_x = self.settings.margin_left - 5
         for i, line in enumerate(lines):
             pinyin_y = start_y - i * line_height
-            c.drawString(pinyin_x, pinyin_y, line) # type: ignore
+            c.drawString(pinyin_x, pinyin_y, line)  # type: ignore
 
     def draw_row(self, current_y: float, line_text: str, start_index: int):
 
