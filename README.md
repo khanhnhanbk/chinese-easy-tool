@@ -1,28 +1,33 @@
 # Chinese Easy Tool
 
-Ứng dụng Streamlit tạo worksheet luyện viết chữ Hán có thể in được dưới dạng PDF.
+Bộ công cụ học tiếng Trung bằng Streamlit, bao gồm tạo worksheet luyện viết chữ Hán và tách từ tiếng Trung.
 
-## Tính năng
+## Tính năng chính
 
-- Nhập chữ Hán hoặc cụm từ
-- Tùy chỉnh bố cục worksheet:
-  - kích thước ô
-  - số cột luyện nét
-  - lề trái và lề trên
-  - hiển thị Pinyin
+- Trang home bằng tiếng Việt với điều hướng rõ ràng
+- Tạo worksheet luyện viết chữ Hán:
+  - chỉnh kích thước ô
+  - chỉnh số cột luyện nét
+  - chỉnh lề trái và lề trên
+  - bật/tắt hiển thị Pinyin
   - chế độ nhiều ký tự
-- Sinh file PDF và tải về ngay
-- Chọn tên file đầu ra dễ dàng
+  - xuất file PDF và tải về ngay
+- Bộ tách từ tiếng Trung Viterbi:
+  - tách câu thành token
+  - tùy chọn dấu phân cách giữa các token
+  - giữ nguyên số nguyên như `20`
 
 ## Cấu trúc dự án
 
-- `app.py` - trang chính của ứng dụng
-- `pages/01_Practice_Sheet.py` - trang tạo worksheet
+- `app.py` - trang chính (home) của ứng dụng
+- `pages/01_Practice_Sheet.py` - trang tạo worksheet luyện viết chữ Hán
+- `pages/02_viterbi_tokenizer.py` - trang tách từ tiếng Trung
 - `services/generate_practice_sheet.py` - logic tạo PDF
+- `services/viterbi_tokenizer.py` - bộ tách từ Viterbi
 - `datas/usersetting.py` - model cài đặt người dùng
 - `fonts/` - font chữ dùng cho chữ Hán và Pinyin
 - `assets/` - tài nguyên tĩnh như ảnh QR
-- `requirements.txt` - các thư viện Python cần cài
+- `requirements.txt` - thư viện Python cần cài
 
 ## Yêu cầu
 
@@ -43,16 +48,23 @@ pip install -r requirements.txt
 ## Chạy ứng dụng
 
 ```bash
-.venv\Scripts\python.exe -m streamlit run pages/01_Practice_Sheet.py
+.venv\Scripts\python.exe -m streamlit run app.py
 ```
 
-## Cách dùng
+## Hướng dẫn sử dụng
 
-1. Nhập chữ Hán hoặc cụm từ ở ô bên trái.
-2. Chỉnh cài đặt worksheet trong phần Cài đặt nâng cao.
-3. Nhập tên file PDF đầu ra.
-4. Nhấn `🚀 Tạo PDF` để sinh worksheet.
-5. Nhấn `⬇️ Tải PDF` khi nút download xuất hiện.
+1. Mở ứng dụng.
+2. Chọn công cụ từ trang chủ.
+3. Với `Tạo worksheet luyện viết chữ Hán`:
+   - Nhập chữ Hán hoặc cụm từ.
+   - Chỉnh cài đặt trong phần Cài đặt nâng cao.
+   - Nhấn `🚀 Tạo PDF`.
+   - Nhấn `⬇️ Tải PDF` khi nút download xuất hiện.
+4. Với `Bộ tách từ tiếng Trung`:
+   - Nhập đoạn văn bản tiếng Trung.
+   - Chọn dấu phân cách giữa các token.
+   - Nhấn `🚀 Tách từ`.
+   - Kết quả sẽ hiển thị theo định dạng đã chọn.
 
 ## Buy me a coffee
 
@@ -68,9 +80,9 @@ Hoặc quét mã QR bên dưới
 
 ## Ghi chú
 
-- Ứng dụng dùng ReportLab để xuất PDF.
-- File PDF có thể tải về trực tiếp từ trang.
-- Nếu ô nhập trống, quá trình tạo sẽ hiển thị cảnh báo.
+- Worksheet PDF được tạo bằng ReportLab.
+- Bộ tách từ dùng thuật toán Viterbi và từ điển tần suất.
+- Ứng dụng hiển thị cảnh báo khi ô nhập trống.
 
 ## Giấy phép
 
