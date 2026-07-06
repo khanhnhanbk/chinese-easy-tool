@@ -1,7 +1,8 @@
 import math
 import re
-from services import BASE_DIR
+from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 CHINESE_UNICODE_RANGE = [
     (0x25CB, 0x25CB),  # White Circle
     (0x2E80, 0x2EF3),  # CJK Radicals Supplement
@@ -79,7 +80,7 @@ class ViterbiChineseTokenizer:
         if not text:
             return []
 
-        result : list[tuple[bool, str]] = []
+        result: list[tuple[bool, str]] = []
 
         current = text[0]
         current_is_chinese = is_chinese_char(text[0])
@@ -134,13 +135,17 @@ class ViterbiChineseTokenizer:
         return bool(re.fullmatch(r"[0-9]+", segment))
 
     def tokenize(self, text: str) -> list[str]:
-        result : list[str] = []
+        result: list[str] = []
 
         for is_chinese, segment in self._split_segments(text):
             if is_chinese:
                 result.extend(self._tokenize_chinese(segment))
             else:
-                if result and self._is_numeric_segment(segment) and self._is_numeric_segment(result[-1]):
+                if (
+                    result
+                    and self._is_numeric_segment(segment)
+                    and self._is_numeric_segment(result[-1])
+                ):
                     result[-1] = result[-1] + segment
                 else:
                     result.append(segment)
