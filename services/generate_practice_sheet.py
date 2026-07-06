@@ -2,6 +2,8 @@ import math
 
 import re
 import io
+
+from pathlib import Path
 from reportlab.pdfgen import canvas
 
 from pypinyin import pinyin
@@ -11,9 +13,9 @@ from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 
 from datas.usersetting import SeparatorEnum, UserSettings
-from services import BASE_DIR
 from services.normalizer_tool import TextNormalizer
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 FONT_PATH = BASE_DIR / "fonts" / "Kaiti.ttf"
 PINYIN_FONT = BASE_DIR / "fonts" / "SpaceGrotesk.ttf"
 
@@ -83,9 +85,7 @@ class ChinesePracticeSheetGenerator:
             self.output_mode = "memory"
         else:
             self.buffer = None
-            self.filename = build_output_file(
-                user_settings.output_directory, user_settings.output_filename
-            )
+            self.filename = user_settings.output_filename
             self.output_mode = "file"
 
         width, height = A4
