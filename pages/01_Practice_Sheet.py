@@ -126,12 +126,12 @@ with right:
             )
         else:
             st.button("⬇️ Tải PDF", disabled=True, use_container_width=True)
-    
+
     st.markdown("---")
 
     st.markdown("## ☕ Ủng hộ mình")
 
-    col_qr, col_text = st.columns([1, 1.6], gap="large")
+    col_qr, col_text = st.columns([1, 1], gap="small")
 
     with col_qr:
         st.image(
@@ -145,23 +145,24 @@ with right:
             <div style="font-size:16px; line-height:1.8">
 
             Nếu bạn thấy công cụ này hữu ích, mình rất cảm ơn nếu bạn ủng hộ một ly cà phê ☕
-
-            <br/><br/>
-
-            <b>💳 Thông tin chuyển khoản ủng hộ</b><br/>
-            Ngân hàng: <b>MB Bank</b><br/>
-            Số tài khoản: <b>0349796850</b><br/>
-            Chủ tài khoản: <b>NGUYỄN VĂN KHÁNH NHÂN</b><br/>
-
-            <br/>
-
-            👉 Hoặc quét mã QR bên cạnh để ủng hộ nhanh.
-
             </div>
             """,
             unsafe_allow_html=True,
         )
-          
+
+    st.markdown(
+        """
+                <div style="font-size:16px; line-height:1.8">
+                <b>💳 Thông tin chuyển khoản ủng hộ</b><br/>
+                Ngân hàng: <b>MB Bank</b><br/>
+                Số tài khoản: <b>0349796850</b><br/>
+                Chủ tài khoản: <b>NGUYỄN VĂN KHÁNH NHÂN</b><br/>
+                <br/>
+                👉 Hoặc quét mã QR bên cạnh để ủng hộ nhanh.
+                </div>
+                """,
+        unsafe_allow_html=True,
+    )
 
 
 # ======================
