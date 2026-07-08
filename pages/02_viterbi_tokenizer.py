@@ -30,11 +30,11 @@ with col1:
     )
 
     with col12:
-      st.markdown("<br>", unsafe_allow_html=True)
-      run_btn = st.button(
-          "🚀 Tách từ",
-          use_container_width=True,
-      )
+        st.markdown("<br>", unsafe_allow_html=True)
+        run_btn = st.button(
+            "🚀 Tách từ",
+            use_container_width=True,
+        )
 
     # =========================
     # OUTPUT AREA
@@ -70,13 +70,15 @@ with col2:
     st.write("⚡ Tách từ nhanh, xử lý gần như tức thì.")
     st.write("🎯 Độ chính xác cao với từ điển hơn 30.000 từ thông dụng.")
     st.write("📄 Không giới hạn độ dài văn bản (phụ thuộc cấu hình máy).")
-    st.write("🔒 Chạy hoàn toàn trên máy chủ của ứng dụng, không gửi dữ liệu sang dịch vụ bên thứ ba.")
+    st.write(
+        "🔒 Chạy hoàn toàn trên máy chủ của ứng dụng, không gửi dữ liệu sang dịch vụ bên thứ ba."
+    )
 
     st.markdown("---")
 
     st.markdown("## ☕ Ủng hộ mình")
 
-    col_qr, col_text = st.columns([1, 1.6], gap="large")
+    col_qr, col_text = st.columns([1, 1], gap="small")
 
     with col_qr:
         st.image(
@@ -90,21 +92,21 @@ with col2:
             <div style="font-size:16px; line-height:1.8">
 
             Nếu bạn thấy công cụ này hữu ích, mình rất cảm ơn nếu bạn ủng hộ một ly cà phê ☕
-
-            <br/><br/>
-
-            <b>💳 Thông tin chuyển khoản ủng hộ</b><br/>
-            Ngân hàng: <b>MB Bank</b><br/>
-            Số tài khoản: <b>0349796850</b><br/>
-            Chủ tài khoản: <b>NGUYỄN VĂN KHÁNH NHÂN</b><br/>
-
-            <br/>
-
-            👉 Hoặc quét mã QR bên cạnh để ủng hộ nhanh.
-
             </div>
             """,
             unsafe_allow_html=True,
         )
-          
 
+    st.markdown(
+        """
+                <div style="font-size:16px; line-height:1.8">
+                <b>💳 Thông tin chuyển khoản ủng hộ</b><br/>
+                Ngân hàng: <b>MB Bank</b><br/>
+                Số tài khoản: <b>0349796850</b><br/>
+                Chủ tài khoản: <b>NGUYỄN VĂN KHÁNH NHÂN</b><br/>
+                <br/>
+                👉 Hoặc quét mã QR bên cạnh để ủng hộ nhanh.
+                </div>
+                """,
+        unsafe_allow_html=True,
+    )
