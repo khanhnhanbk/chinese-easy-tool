@@ -87,3 +87,9 @@ Hoặc quét mã QR bên dưới
 ## Giấy phép
 
 Dự án cung cấp "như hiện trạng" và không có bảo hành.
+
+## Giấy phép / License
+
+- Mã nguồn: [MIT](LICENSE).
+- Phông chữ Hán: [LXGW WenKai](https://github.com/lxgw/LxgwWenKai) v1.530 (SIL OFL 1.1, `fonts/OFL-LXGWWenKai.txt`); Pinyin: [Space Grotesk](https://github.com/floriankarsten/space-grotesk) (SIL OFL 1.1, `fonts/OFL-SpaceGrotesk.txt`).
+- Thư viện: streamlit (Apache-2.0), reportlab (BSD-3-Clause), pypinyin (MIT).

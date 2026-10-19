@@ -16,7 +16,7 @@ from datas.usersetting import SeparatorEnum, UserSettings
 from services.normalizer_tool import TextNormalizer
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-FONT_PATH = BASE_DIR / "fonts" / "Kaiti.ttf"
+FONT_PATH = BASE_DIR / "fonts" / "LXGWWenKai-Regular.ttf"
 PINYIN_FONT = BASE_DIR / "fonts" / "SpaceGrotesk.ttf"
 
 
@@ -63,9 +63,9 @@ def build_output_file(
 
 class ChinesePracticeSheetGenerator:
 
-    pdfmetrics.registerFont(TTFont("KaiTi", FONT_PATH))  # type: ignore
+    pdfmetrics.registerFont(TTFont("LXGWWenKai", FONT_PATH))  # type: ignore
     pdfmetrics.registerFont(TTFont("PinyinFont", PINYIN_FONT))  # type: ignore
-    CHAR_FONT = "KaiTi"
+    CHAR_FONT = "LXGWWenKai"
     PINYIN_FONT = "PinyinFont"
     BLACK: tuple[float, float, float] = (0, 0, 0)
     GRAY: tuple[float, float, float] = (0.6, 0.6, 0.6)
